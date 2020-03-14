@@ -1,6 +1,6 @@
 # Gerar nome em Dorime
 
-  Esse é um gerador de nome em "Dorime" craido em cima da imagem
+  Esse é um gerador de nome em "Dorime" foi criado em cima da imagem
   
   ![Imagem do das letras em Dorime](https://pbs.twimg.com/media/ESgQSiVWkAAF_Qg.jpg)
 
