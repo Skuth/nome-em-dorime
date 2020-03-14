@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veja seu nome em Dorime</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="animated fadeInUp">Como seria seu nome em <span>Dorime</span></h1>
+    <form onsubmit="nameSubmit(event, this)">
+      <input type="text" placeholder="Seu nome" required pattern="[A-z\s]{1,15}" class="animated bounceIn">
+    </form>
+
+    <canvas id="canvasDorime" width="450" height="500">
+      <img id="templateImage" src="template.png" width="450" height="500">
+    </canvas>
+  </div>
+
+  <div class="background">
+    <img src="background.gif">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
