@@ -71,6 +71,9 @@ const createBlobUrl =(dataUrl) => {
   return blob
 }
 
+//window.open('http://www.facebook.com/sharer.php?u='+url+'&t='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
+//window.open('https://twitter.com/intent/tweet?url=https://bit.ly/39REUMS&text='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
+
 const createImage = (name) => {
   const canvas = document.getElementById("canvasDorime")
   const ctx = canvas.getContext("2d")
@@ -83,14 +86,13 @@ const createImage = (name) => {
   ctx.fillText(name, 300, 230, 260)
 
   let dataUrl = canvas.toDataURL("image/jpeg")
-  let textUri = encodeURIComponent("Meu nome em Dorime fica assim, como fica o seu?")
+  //let textUri = encodeURIComponent("Meu nome em Dorime fica assim, como fica o seu?") texto para compartilhar em rede social
+  let downloadUrl = dataUrl.replace("image/jpeg", "image/octet-stream")
 
-  const blobUrl = createBlobUrl(dataUrl)
-
-  console.log(blobUrl)
-
-  //window.open('http://www.facebook.com/sharer.php?u='+url+'&t='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
-  //window.open('https://twitter.com/intent/tweet?url=https://bit.ly/39REUMS&text='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
+  const btn = document.getElementById("btnDownload")
+  btn.style.display = "block"
+  btn.setAttribute('download', 'meunomeemdorime.jpeg')
+  btn.setAttribute('href', downloadUrl)
 }
 
 const nameSubmit = (e, form) => {
