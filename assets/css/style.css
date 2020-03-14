@@ -144,7 +144,7 @@ body {
 .container form input {
   padding: 20px;
   width: calc(80% - 20px * 2);
-  max-width: 400px;
+  max-width: 410px;
   box-shadow: 8px 16px 20px rgba(0,0,0,0.4);
   margin: 0 auto;
   outline: none;
