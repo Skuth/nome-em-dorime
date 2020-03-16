@@ -7,7 +7,7 @@
 ## A fazer
 
   - [X] Baixar imagem
-  - [ ] Enviar imagem para [imgbb](https://imgbb.com/) ou [imgur](https://imgur.com/)
+  - [X] Enviar imagem para [imgur](https://imgur.com/)
   - [ ] Compartilhar foto no Facebook, Twitter e Whatsapp
 
 ## Quer ajudar?
