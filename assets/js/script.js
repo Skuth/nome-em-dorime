@@ -27,15 +27,6 @@ const lib = {
   "z": "nare",
 }
 
-window.fbAsyncInit = function() {
-  FB.init({
-    appId            : '604873003427211',
-    autoLogAppEvents : true,
-    xfbml            : true,
-    version          : 'v6.0'
-  });
-};
-
 const nameDorime = (name) => {
   name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   name = name.toLowerCase()
