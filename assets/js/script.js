@@ -27,6 +27,15 @@ const lib = {
   "z": "nare",
 }
 
+window.fbAsyncInit = function() {
+  FB.init({
+    appId            : '604873003427211',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v6.0'
+  });
+};
+
 const nameDorime = (name) => {
   name = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   name = name.toLowerCase()
@@ -50,29 +59,58 @@ const nameDorime = (name) => {
   return newName
 }
 
-const dataUriBlob = (dataUrl, mime) => {
-  const byteString = window.atob(dataUrl)
-  const ia = new Uint8Array(byteString.length)
+// const dataUriBlob = (dataUrl, mime) => {
+//   const byteString = window.atob(dataUrl)
+//   const ia = new Uint8Array(byteString.length)
 
-  for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i)
-  }
+//   for (let i = 0; i < byteString.length; i++) {
+//     ia[i] = byteString.charCodeAt(i)
+//   }
 
-  const blob = new Blob([ia], {type: mime})
+//   const blob = new Blob([ia], {type: mime})
 
-  const blobUrl = URL.createObjectURL(blob)
+//   const blobUrl = URL.createObjectURL(blob)
 
-  return blobUrl
+//   return blobUrl
+// }
+
+// const createBlobUrl =(dataUrl) => {
+//   const imgData = dataUrl.match(/data:(image\/.+);base64,(.+)/);
+//   const blob = dataUriBlob(imgData[2], imgData[1])
+//   return blob
+// }
+
+const imgurUpload = (imageUrl, name) => {
+  const token = "39a1713e39fdfe0"
+
+  $.ajax({
+    type: "POST",
+    url: "https://api.imgur.com/3/upload",
+    headers: {
+      Authorization: `Client-ID ${token}`
+    },
+    data: {
+      image: imageUrl,
+      type: "Base64",
+      title: `Meu nome em Dorime fica ${name}`
+    },
+    dataType: "json",
+    success: (res) => {
+      console.log(res)
+    },
+    error: (res) => {
+      console.log(res)
+    }
+  });
 }
 
-const createBlobUrl =(dataUrl) => {
-  const imgData = dataUrl.match(/data:(image\/.+);base64,(.+)/);
-  const blob = dataUriBlob(imgData[2], imgData[1])
-  return blob
+const shareFacebook = (image) => {
+  FB.ui({
+    method: "share",
+    href: image,
+    quote: "Meu nome em Dorime fica assim, como fica o seu?"
+  })
 }
-
-//window.open('http://www.facebook.com/sharer.php?u='+url+'&t='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
-//window.open('https://twitter.com/intent/tweet?url=https://bit.ly/39REUMS&text='+textUri,'sharer','toolbar=0,status=0,width=640,height=430');
 
 const createImage = (name) => {
   const canvas = document.getElementById("canvasDorime")
@@ -85,13 +123,15 @@ const createImage = (name) => {
   ctx.textAlign= "center"
   ctx.fillText(name, 300, 230, 260)
 
-  let dataUrl = canvas.toDataURL("image/jpeg")
-  //let textUri = encodeURIComponent("Meu nome em Dorime fica assim, como fica o seu?") texto para compartilhar em rede social
-  let downloadUrl = dataUrl.replace("image/jpeg", "image/octet-stream")
+  let dataUrl = canvas.toDataURL("image/png")
+  let downloadUrl = dataUrl.replace("image/png", "image/octet-stream")
+
+  let imgurDataUrl = dataUrl.replace("data:image/png;base64,", "")
+  imgurUpload(imgurDataUrl, name)
 
   const btn = document.getElementById("btnDownload")
   btn.style.display = "block"
-  btn.setAttribute('download', 'meunomeemdorime.jpeg')
+  btn.setAttribute('download', 'meunomeemdorime.png')
   btn.setAttribute('href', downloadUrl)
 }
 
