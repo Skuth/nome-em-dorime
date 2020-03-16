@@ -177,3 +177,15 @@ body {
   background: white;
   color: #222;
 }
+
+@media (max-width: 500px) {
+  .container h1 {
+    font-size: 28px;
+  }
+  .container form input {
+    width: calc(100% - 20px * 2);
+  }
+  .container canvas {
+    width: 100%
+  }
+}
