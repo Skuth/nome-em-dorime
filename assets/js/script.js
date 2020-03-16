@@ -59,33 +59,46 @@ const nameDorime = (name) => {
   return newName
 }
 
-// const imgurUpload = (imageUrl, name) => {
-//   const token = "39a1713e39fdfe0"
-
-//   $.ajax({
-//     type: "POST",
-//     url: "https://api.imgur.com/3/image",
-//     headers: {
-//       Authorization: `Client-ID ${token}`
-//     },
-//     data: {
-//       image: imageUrl,
-//       type: "Base64",
-//       title: `Meu nome em Dorime fica ${name}`
-//     },
-//     dataType: "json",
-//     success: (res) => {
-//       shareFacebook(res.data.link)
-//        Add button to share | fix text in share
-//     }
-//   })
-// }
-
 const shareFacebook = (image) => {
   FB.ui({
     method: "share",
     href: image,
-    quote: "Meu nome em Dorime fica assim, como fica o seu? \nCrie o seu em https://meunomedorime.site/"
+    quote: "Meu nome em Dorime fica assim, como fica o seu? \nCrie o seu em meunomedorime.site"
+  })
+}
+
+// const shareTwitter = (image) => {
+//   let text = "Meu nome em Dorime fica assim, como fica o seu?"
+//   window.open('http://twitter.com/share?url='+encodeURIComponent(image)+'&text='+encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+// }
+
+const imgurUpload = (dataUrl, name) => {
+  const box = document.getElementById("btnContainer")
+  const btn = document.getElementById("btnDownload")
+  const token = "39a1713e39fdfe0"
+
+  let downloadUrl = dataUrl.replace("image/png", "image/octet-stream")
+  let imageUrl = dataUrl.replace("data:image/png;base64,", "")
+
+  $.ajax({
+    type: "POST",
+    url: "https://api.imgur.com/3/image",
+    headers: {
+      Authorization: `Client-ID ${token}`
+    },
+    data: {
+      image: imageUrl,
+      type: "Base64",
+      title: `Meu nome em Dorime fica ${name}`
+    },
+    dataType: "json",
+    success: (res) => {
+      btn.style.display = "inline-block"
+      btn.setAttribute('download', 'meunomeemdorime.png')
+      btn.setAttribute('href', downloadUrl)
+      box.innerHTML += `<a onclick="shareFacebook('${res.data.link}')"><i class="fab fa-facebook"></i> Facebook</a>`
+      //box.innerHTML += `<a onclick="shareTwitter('${res.data.link}')">Twitter</a>`
+    }
   })
 }
 
@@ -101,15 +114,8 @@ const createImage = (name) => {
   ctx.fillText(name, 300, 230, 260)
 
   let dataUrl = canvas.toDataURL("image/png")
-  let downloadUrl = dataUrl.replace("image/png", "image/octet-stream")
-  let imgurDataUrl = dataUrl.replace("data:image/png;base64,", "")
   
-  //imgurUpload(imgurDataUrl, name)
-
-  const btn = document.getElementById("btnDownload")
-  btn.style.display = "block"
-  btn.setAttribute('download', 'meunomeemdorime.png')
-  btn.setAttribute('href', downloadUrl)
+  imgurUpload(dataUrl, name)
 }
 
 const nameSubmit = (e, form) => {
