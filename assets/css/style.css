@@ -189,4 +189,7 @@ body {
   .container canvas {
     width: 100%
   }
+  .container .btnContainer a {
+    display: block;
+  }
 }

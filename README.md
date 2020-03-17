@@ -8,7 +8,7 @@
 
   - [X] Baixar imagem
   - [X] Enviar imagem para [imgur](https://imgur.com/)
-  - [ ] Compartilhar foto no Facebook, Twitter e Whatsapp
+  - [X] Compartilhar foto no Facebook
 
 ## Quer ajudar?
 
