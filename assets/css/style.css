@@ -152,12 +152,13 @@ body {
   font-size: 20px;
 }
 .container canvas {
-  margin-top: 40px;
+  margin-top: 20px;
   border-radius: 10px;
 }
 .container .btnContainer {
   display: block;
   padding: 20px;
+  margin-top: 20px;
 }
 .container .btnContainer a {
   display: inline-block;
